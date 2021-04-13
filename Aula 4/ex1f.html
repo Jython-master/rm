@@ -4,33 +4,28 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>codigo base</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            img{
+                height: 10px;
+                width: 10px;
+            }
+        </style>
 	</head>
 	<body>
-        <img src="23537eed5fb2b832168835aeba2954ed.jpg" height="10" width="10" style="visibility: none" id="image">
         <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
+        <img src="23537eed5fb2b832168835aeba2954ed.jpg" height="10" width="10" style="visibility: none" id="image">
         <script>
-        $().ready(function(){
+            window.onload = function(){
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
             context.lineWidth = 8;
             var imagem = document.getElementById("image");
-            var im = context.createPattern(im, "repeat");
+            var im = context.createPattern(imagem, "repeat");
             context.strokeStyle = "#00d7e6";
             context.strokeRect(50,50, 150, 150);
             context.fillStyle = im;
             context.fillRect(50,50, 150, 150);
-            context.strokeStyle = "#2a00e6";
-            context.strokeRect(100, 100, 150, 150);
-            var im = context.createPattern(im, "repeat-x");
-            context.fillStyle = im;
-            context.fillRect(100, 100, 150, 150);
-            context.strokeStyle = "#58e600";
-            context.strokeRect(150, 150, 150, 150);
-            var im = context.createPattern(im, "repeat-y");
-            context.fillStyle = im;
-            
-            
-        });</script>
+            }
+        </script>
 	</body>
 </html>
