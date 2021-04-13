@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--Fala professor, tudo certo? esse e o codigo base que usarei para todos os exercicios de programacao-->
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1d</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var canvas = document.getElementById("canvas");;
+            var context = canvas.getContext("2d");
+            context.lineWidth = 8;
+            var gradient = context.createLinearGradient(50, 50, 250, 250);
+            gradient.addColorStop(0, "#51e600");
+            gradient.addColorStop(1, "#004de6");
+            context.strokeStyle = "#00a8e6";
+            context.fillStyle = gradient;
+            context.strokeRect(50, 50, 200, 200);
+            context.fillRect(50, 50, 200, 200);
+        });</script>
+	</head>
+	<body>
+        <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
+	</body>
+</html>

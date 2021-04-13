@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--Fala professor, tudo certo? esse e o codigo base que usarei para todos os exercicios de programacao-->
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1b</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var canvas = document.getElementById("canvas");;
+            var context = canvas.getContext("2d");
+            context.strokeStyle = "#c78c04";
+            context.lineWidth = 8;
+            context.beginPath();
+            context.lineJoin = "mitel";
+            context.moveTo(25, 100);
+            context.lineTo(25, 25);
+            context.lineTo(100, 25);
+            context.closePath();
+            context.stroke();
+            context.strokeStyle = "#87f235";
+            context.lineWidth = 7;
+            context.beginPath();
+            context.lineJoin = "bevel";
+            context.moveTo(125, 100);
+            context.lineTo(125, 25);
+            context.lineTo(200, 25);
+            context.closePath();
+            context.stroke();
+            context.strokeStyle = "#f23555";
+            context.lineWidth = 5;
+            context.beginPath();
+            context.lineJoin = "round";
+            context.moveTo(225, 100);
+            context.lineTo(225, 25);
+            context.lineTo(300, 25);
+            context.closePath();
+            context.stroke();
+        });</script>
+	</head>
+	<body>
+        <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
+	</body>
+</html>

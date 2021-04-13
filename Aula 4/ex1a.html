@@ -1,0 +1,32 @@
+`<!DOCTYPE html>
+<!--Fala professor, tudo certo? esse e o codigo base que usarei para todos os exercicios de programacao-->
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1a</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var canvas = document.getElementById("canvas");;
+            var context = canvas.getContext("2d");
+            context.globalAlpha = 0.5;
+            context.strokeStyle = "#c7c104";
+            context.fillStyle = "#044fc7";
+            context.fillRect(10, 10, 50, 50);
+            context.strokeRect(10, 10, 50, 50);
+            context.globalAlpha = 0.4;
+            context.fillStyle = "#1bc704";
+            context.strokeStyle = "#c70428";
+            context.fillRect(40, 40, 50, 50);
+            context.strokeRect(40, 40, 50, 50);
+            context.globalAlpha = 0.2;
+            context.fillStyle = "#bd04c7";
+            context.strokeStyle = "#04c70a";
+            context.fillRect(80, 80, 50, 50);
+            context.strokeRect(80, 80, 50, 50);
+        });</script>
+	</head>
+	<body>
+        <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
+	</body>
+</html>
