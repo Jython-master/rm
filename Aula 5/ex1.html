@@ -6,7 +6,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
         $().ready(function(){
-            var canvas = document.getElementById("canvas");;
+            var canvas = document.getElementById("canvas");
+            var audio = document.getElementById("au1");
+            var audioo = document.getElementById("au2");
+            var context = canvas.getContext("2d");
             var context = canvas.getContext("2d");
             var idTeste;
             var stuff = {
@@ -31,6 +34,9 @@
 
                 if(stuff.x<0 || stuff.y<0 || stuff.x+stuff.widthhh>canvas.width || stuff.y+stuff.heighttt>canvas.height){  
                     cancelAnimationFrame(idTeste);
+                    audio.pause();
+                    audioo.play();
+                    
                 } 
                  
             }
@@ -56,8 +62,14 @@
         });</script>
 	</head>
 	<body>
-        <audio autoplay loop>
-            <source type="audio.mpeg" src="">
+        <audio id="au1" autoplay loop>
+            <source src="Untitled%20Project.m4a" id="aaa" type="audio/mp4" />
+            <source src="Learn%20to%20travel%20%20%20%20travel%20to%20learn%20Robin%20Esrock%20at%20TEDxVancouver.mp3" id="aa" type="audio/mpeg" />
+            <source src="Untitled%20Project%20(online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <audio id="au2" loop>
+            <source src="Rick%20Astley%20%20%20Never%20Gonna%20Give%20You%20Up%20(Video).mp3" id="aa" type="audio/mpeg" />
+            <source src="Rick%20Astley%20Never%20Gonna%20Give%20You%20Up%20(Video)%20(online-audio-converter.com).ogg" type="audio/ogg" />
         </audio>
         <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
 	</body>
