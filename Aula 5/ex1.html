@@ -8,6 +8,7 @@
         $().ready(function(){
             var canvas = document.getElementById("canvas");;
             var context = canvas.getContext("2d");
+            var idTeste;
             var stuff = {
                 "x": 0,
                 "y": 0,
@@ -23,13 +24,15 @@
                 context.fillStyle = stuff.color;
                 stuff.x += stuff.speedx;
                 stuff.y += stuff.speedy;
-                if(stuff.x < 0 || stuff.y < 0 || stuff.x +stuff.widthhh >= canvas.width || stuff.y + stuff.widthhh >= canvas.height){
-                    alert("sagf");
-                    cancelAnimationFrame(animate);
-                }
-                context.fillRect(stuff.x, stuff.y, stuff.heighttt, stuff.widthhh);
-                animation = requestAnimationFrame(animate);
-                
+                 
+                context.fillRect(stuff.x, stuff.y, stuff.widthhh,stuff.heighttt);
+                   
+                idTeste = requestAnimationFrame(animate); 
+
+                if(stuff.x<0 || stuff.y<0 || stuff.x+stuff.widthhh>canvas.width || stuff.y+stuff.heighttt>canvas.height){  
+                    cancelAnimationFrame(idTeste);
+                } 
+                 
             }
            var animation = animate();
             $(document).keydown(function(event){
@@ -53,6 +56,9 @@
         });</script>
 	</head>
 	<body>
+        <audio autoplay loop>
+            <source type="audio.mpeg" src="">
+        </audio>
         <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
 	</body>
 </html>
