@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var canvas = document.getElementById("canvas");;
+            var context = canvas.getContext("2d");
+            var stuff = {
+                "x": 0,
+                "y": 0,
+                "color": "#00a8e6",
+                "widthhh": 25,
+                "heighttt": 25,
+                "speedx": 0,
+                "speedy": 0
+            }
+            context.fillRect(stuff.x, stuff.y, stuff.heighttt, stuff.widthhh);
+            function animate(){
+                context.clearRect(0,0, canvas.width, canvas.height);
+                context.fillStyle = stuff.color;
+                stuff.x += stuff.speedx;
+                stuff.y += stuff.speedy;
+                if(stuff.x < 0 || stuff.y < 0 || stuff.x +stuff.widthhh >= canvas.width || stuff.y + stuff.widthhh >= canvas.height){
+                    alert("sagf");
+                    cancelAnimationFrame(animate);
+                }
+                context.fillRect(stuff.x, stuff.y, stuff.heighttt, stuff.widthhh);
+                animation = requestAnimationFrame(animate);
+                
+            }
+           var animation = animate();
+            $(document).keydown(function(event){
+                if(event.which == 38){
+                    stuff.speedx = 0; 
+                    stuff.speedy = -1;
+                }
+                if(event.which == 40){
+                    stuff.speedx = 0; 
+                    stuff.speedy = 1; 
+                }
+                if(event.which == 37){
+                    stuff.speedx = -1; 
+                    stuff.speedy = 0; 
+                }
+                if(event.which == 39){
+                    stuff.speedx = 1; 
+                    stuff.speedy = 0; 
+                }
+            });
+        });</script>
+	</head>
+	<body>
+        <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
+	</body>
+</html>
