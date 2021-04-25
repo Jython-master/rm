@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var canvas = document.getElementById("canvas");
+            var audio = document.getElementById("au1");
+            var audioo = document.getElementById("au2");
+            var context = canvas.getContext("2d");
+            var context = canvas.getContext("2d");
+            var idTeste;
+            var stuff = {
+                "x": 0,
+                "y": 0,
+                "color": "#00a8e6",
+                "widthhh": 25,
+                "heighttt": 25,
+                "speedx": 0,
+                "speedy": 0
+            }
+            var i;
+            var number = 0;
+            enemies = []
+            for(i = 0; i < 5; i++){
+                tempEnemy = {
+                    "x": Math.floor(Math.random() * canvas.width), // O bloco nao deve comecar entre as posicoes 0 e 25, ja que la comecara o quadrado principal
+                    "y": Math.floor(Math.random() * canvas.height),
+                    "color": "#00a8e6",
+                    "w": 30,
+                    "h": 30
+                }
+                context.fillRect(tempEnemy.x, tempEnemy.y, tempEnemy.h, tempEnemy.w);
+                enemies.push(tempEnemy);
+                context.fillText(number, 200, 100);
+            }
+            function enemycanvas(){
+                for(i = 0; i < 5; i++){
+                    context.fillRect(enemies[i].x, enemies[i].y, enemies[i].h, enemies[i].w);
+                }
+            }
+            function changePos(i){
+                enemies[i].x = Math.floor(Math.random() * canvas.width);
+                enemies[i].y = Math.floor(Math.random() * canvas.height);
+            }
+            function collision(){
+                for(i = 0; i < 5; i++){
+                    if(stuff.y < (enemies[i].x + enemies[i].h) && (stuff.y + stuff.heighttt) > enemies[i].y && stuff.x < (enemies[i].x + enemies[i].w) && (stuff.x + stuff.widthhh) > enemies[i].x){
+                        changePos(i);
+                        number += 1;
+                    }
+                }
+            }
+            context.fillRect(stuff.x, stuff.y, stuff.heighttt, stuff.widthhh);
+            function animate(){
+                context.clearRect(0,0, canvas.width, canvas.height);
+                context.fillStyle = stuff.color;
+                stuff.x += stuff.speedx;
+                stuff.y += stuff.speedy;
+                 
+                context.fillRect(stuff.x, stuff.y, stuff.widthhh,stuff.heighttt);
+                context.fillText(number, 400, 20);
+                enemycanvas();
+                idTeste = requestAnimationFrame(animate); 
+                collision();
+                if(!(0<=stuff.y&&canvas.height>=(stuff.y + stuff.heighttt)&&0<=stuff.x&&canvas.width>=(stuff.x + stuff.widthhh))){  
+                    if(stuff.x < 0){
+                        stuff.x = canvas.width;
+                    }
+                    else if((stuff.x + stuff.widthhh) > canvas.width){
+                        stuff.x = 0;
+                    }
+                    if(stuff.y < 0){
+                        stuff.y = canvas.height;
+                    }
+                    else if((stuff.y  + stuff.heighttt) > canvas.height){
+                        stuff.y = 0;
+                    }
+                } 
+                 
+            }
+            function uodateEnemy(i){
+                
+            }
+           var animation = animate();
+            $(document).keydown(function(event){
+                if(event.which == 38){
+                    stuff.speedx = 0; 
+                    stuff.speedy = -1;
+                }
+                if(event.which == 40){
+                    stuff.speedx = 0; 
+                    stuff.speedy = 1; 
+                }
+                if(event.which == 37){
+                    stuff.speedx = -1; 
+                    stuff.speedy = 0; 
+                }
+                if(event.which == 39){
+                    stuff.speedx = 1; 
+                    stuff.speedy = 0; 
+                }
+            });
+        });</script>
+	</head>
+	<body>
+        <audio id="au1" autoplay loop>
+            <source src="Untitled%20Project.m4a" id="aaa" type="audio/mp4" />
+            <source src="Learn%20to%20travel%20%20%20%20travel%20to%20learn%20Robin%20Esrock%20at%20TEDxVancouver.mp3" id="aa" type="audio/mpeg" />
+            <source src="Untitled%20Project%20(online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <audio id="au2" loop>
+            <source src="Rick%20Astley%20%20%20Never%20Gonna%20Give%20You%20Up%20(Video).mp3" id="aa" type="audio/mpeg" />
+            <source src="Rick%20Astley%20Never%20Gonna%20Give%20You%20Up%20(Video)%20(online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <canvas height="500" width="600" style="background-color: antiquewhite" id="canvas"></canvas>
+	</body>
+</html>
