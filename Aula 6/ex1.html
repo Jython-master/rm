@@ -25,13 +25,22 @@
             var number = 0;
             enemies = []
             for(i = 0; i < 5; i++){
+                min = Math.ceil(0);
+                max = Math.floor(canvas.width - 30);
+                a = Math.floor(Math.random() * (max - min + 1)) + min;
+                min = Math.ceil(0);
+                max = Math.floor(canvas.height - 30);
+                aa = Math.floor(Math.random() * (max - min + 1)) + min;
                 tempEnemy = {
-                    "x": Math.floor(Math.random() * canvas.width), // O bloco nao deve comecar entre as posicoes 0 e 25, ja que la comecara o quadrado principal
-                    "y": Math.floor(Math.random() * canvas.height),
+                    "x": a,// O bloco nao deve comecar entre as posicoes 0 e 25, ja que la comecara o quadrado principal
+                    "y": aa,
                     "color": "#00a8e6",
                     "w": 30,
                     "h": 30
                 }
+                console.log(tempEnemy.x);
+                console.log(tempEnemy.y);
+                console.log();
                 context.fillRect(tempEnemy.x, tempEnemy.y, tempEnemy.h, tempEnemy.w);
                 enemies.push(tempEnemy);
                 context.fillText(number, 200, 100);
@@ -42,12 +51,21 @@
                 }
             }
             function changePos(i){
-                enemies[i].x = Math.floor(Math.random() * canvas.width);
-                enemies[i].y = Math.floor(Math.random() * canvas.height);
+                min = Math.ceil(0);
+                max = Math.floor(canvas.width - enemies[i].w);
+                a = Math.floor(Math.random() * (max - min + 1)) + min;
+                min = Math.ceil(0);
+                max = Math.floor(canvas.height - enemies[i].h);
+                aa = Math.floor(Math.random() * (max - min + 1)) + min;
+                enemies[i].x = a;
+                console.log(a);
+                a  = Math.floor(Math.random() * canvas.height - enemies[i].h);
+                enemies[i].y = aa;
+                console.log(a);
             }
             function collision(){
                 for(i = 0; i < 5; i++){
-                    if(stuff.y < (enemies[i].x + enemies[i].h) && (stuff.y + stuff.heighttt) > enemies[i].y && stuff.x < (enemies[i].x + enemies[i].w) && (stuff.x + stuff.widthhh) > enemies[i].x){
+                    if(stuff.y < (enemies[i].y + enemies[i].h) && (stuff.y + stuff.heighttt) > enemies[i].y && stuff.x < (enemies[i].x + enemies[i].w) && (stuff.x + stuff.widthhh) > enemies[i].x){
                         changePos(i);
                         number += 1;
                     }
@@ -67,15 +85,15 @@
                 collision();
                 if(!(0<=stuff.y&&canvas.height>=(stuff.y + stuff.heighttt)&&0<=stuff.x&&canvas.width>=(stuff.x + stuff.widthhh))){  
                     if(stuff.x < 0){
-                        stuff.x = canvas.width;
+                        stuff.x = canvas.width-stuff.widthhh;
                     }
-                    else if((stuff.x + stuff.widthhh) > canvas.width){
+                    if((stuff.x + stuff.widthhh) > canvas.width){ 
                         stuff.x = 0;
                     }
                     if(stuff.y < 0){
-                        stuff.y = canvas.height;
+                        stuff.y = canvas.height-stuff.heighttt;
                     }
-                    else if((stuff.y  + stuff.heighttt) > canvas.height){
+                    if((stuff.y  + stuff.heighttt) > canvas.height){ 
                         stuff.y = 0;
                     }
                 } 
@@ -106,11 +124,6 @@
         });</script>
 	</head>
 	<body>
-        <audio id="au1" autoplay loop>
-            <source src="Untitled%20Project.m4a" id="aaa" type="audio/mp4" />
-            <source src="Learn%20to%20travel%20%20%20%20travel%20to%20learn%20Robin%20Esrock%20at%20TEDxVancouver.mp3" id="aa" type="audio/mpeg" />
-            <source src="Untitled%20Project%20(online-audio-converter.com).ogg" type="audio/ogg" />
-        </audio>
         <audio id="au2" loop>
             <source src="Rick%20Astley%20%20%20Never%20Gonna%20Give%20You%20Up%20(Video).mp3" id="aa" type="audio/mpeg" />
             <source src="Rick%20Astley%20Never%20Gonna%20Give%20You%20Up%20(Video)%20(online-audio-converter.com).ogg" type="audio/ogg" />
