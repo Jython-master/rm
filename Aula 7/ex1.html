@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var canvas = document.getElementById("canvas");
+            var audio = document.getElementById("au1");
+            var audioo = document.getElementById("au2");
+            var context = canvas.getContext("2d");
+            var context = canvas.getContext("2d");
+            var idTeste;
+            var screen = 0;
+            var img = new Image();
+            img.src = "./sonic.png";
+            var stuff = {
+                sonicx: 409,
+                sonicy: 75,
+                sonich: 40,
+                sonicw: 28,
+                step: 1,
+                SonicDefault: function(){
+                    this.sonicx = 409; 
+                    this.sonicy = 75;
+                    this.sonich = 40;
+                    this.sonicw = 28;
+                },
+                SonicRight: [{sonicx: 36, sonicy: 21, sonich: 40,
+                    sonicw: 28}, {sonicx: 72, sonicy: 21, sonich: 40,
+                    sonicw: 28}, {sonicx: 105, sonicy: 21, sonich: 40,
+                    sonicw: 28}, {sonicx: 135, sonicy: 21, sonich: 40,
+                    sonicw: 28}, {sonicx: 164, sonicy: 21, sonich: 40,
+                    sonicw: 28}, {sonicx: 194, sonicy: 21, sonich: 40,
+                    sonicw: 28}],
+                SonicLeft: [{sonicx: 6, sonicy: 21, sonich: 41,
+                    sonicw: 34}, {sonicx: 386, sonicy: 721, sonich: 41,
+                    sonicw: 34}, {sonicx: 421, sonicy: 721, sonich: 41,
+                    sonicw: 34}, {sonicx: 456, sonicy: 721, sonich: 41,
+                    sonicw: 34}, {sonicx: 491, sonicy: 721, sonich: 41,
+                    sonicw: 34}, {sonicx: 526, sonicy: 721, sonich: 41,
+                    sonicw: 34}],
+                SonicDowngo: [ {sonicx: 784, sonicy: 82, sonich: 36,
+                    sonicw: 20}, {sonicx: 868, sonicy: 82, sonich: 36,
+                    sonicw: 20}, {sonicx: 898, sonicy: 82, sonich: 36,
+                    sonicw: 20}, {sonicx: 952, sonicy: 82, sonich: 36,
+                    sonicw: 20}, {sonicx: 978, sonicy: 82, sonich: 36,
+                    sonicw: 20}],
+                SonicUp: [{
+                    sonicx: 36, sonicy: 610, sonich: 41, sonicw: 19},
+                          {sonicx: 67, sonicy: 610, sonich: 41, sonicw: 19},
+                          {x: 95, y: 610, h: 41 ,
+                    sonicw: 19}, {sonicx: 125, sonicy: 610, sonich: 41,
+                    sonicw: 19}, {sonicx: 154, sonicy: 610, sonich: 41,
+                    sonicw: 19}, {sonicx: 898, sonicy: 610, sonich: 41,
+                    sonicw: 19}, {sonicx: 184, sonicy: 610, sonich: 41,
+                    sonicw: 19}, {sonicx: 214, sonicy: 610, sonich: 41,
+                    sonicw: 19}],
+                x:150,
+                y: 150,
+                update: function(dir){
+                    if(dir == "right"){
+                        this.x += this.step;
+                        this.sonicx = this.sonicRight[screen % 7].sonicx;
+                        this.sonicy = this.sonicRight[screen % 7].sonicy;
+                        this.sonich = this.sonicRight[screen % 7].sonich;
+                        this.sonicw = this.sonicRight[screen % 7].sonicw;
+                    }
+                    else if(dir == "left"){
+                        this.x -= this.step;
+                        this.sonicx = this.sonicLeft[screen % 7].sonicx;
+                        this.sonicy = this.sonicLeft[screen % 7].sonicy;
+                        this.sonich = this.sonicLeft[screen % 7].sonich;
+                        this.sonicw = this.sonicLeft[screen % 7].sonicw;
+                    }
+                    else if(dir == "bottom"){
+                        this.y += this.step;
+                        this.sonicx = this.sonicDowngo[screen % 7].sonicx;
+                        this.sonicy = this.sonicDowngo[screen % 7].sonicy;
+                        this.sonich = this.sonicDowngo[screen % 7].sonich;
+                        this.sonicw = this.sonicDowngo[screen % 7].sonicw;
+                    }
+                    else if(dir == "top"){
+                        this.y -= this.step;
+                        this.sonicx = this.sonicUp[screen % 7].sonicx;
+                        this.sonicy = this.sonicUp[screen % 7].sonicy;
+                        this.sonich = this.sonicUp[screen % 7].sonich;
+                        this.sonicw = this.sonicUp[screen % 7].sonicw;
+                    }
+                    if(dir == "stand"){
+                        this.sonicx = this.sonicDefault[screen % 7].sonicx;
+                        this.sonicy = this.sonicDefault[screen % 7].sonicy;
+                        this.sonich = this.sonicDefault[screen % 7].sonich;
+                        this.sonicw = this.sonicDefault[screen % 7].sonicw;
+                    }
+                    else{
+                        this.sonicx = this.sonicDefault[screen % 7].sonicx;
+                        this.sonicy = this.sonicDefault[screen % 7].sonicy;
+                        this.sonich = this.sonicDefault[screen % 7].sonich;
+                        this.sonicw = this.sonicDefault[screen % 7].sonicw;
+                    }
+                },
+                h: this.sonich,
+                w: this.sonicw
+            }
+            var i;
+            var number = 0;
+            enemies = []
+            for(i = 0; i < 5; i++){
+                min = Math.ceil(0);
+                max = Math.floor(canvas.width - 30);
+                a = Math.floor(Math.random() * (max - min + 1)) + min;
+                min = Math.ceil(0);
+                max = Math.floor(canvas.height - 30);
+                aa = Math.floor(Math.random() * (max - min + 1)) + min;
+                tempEnemy = {
+                    "x": a,// O bloco nao deve comecar entre as posicoes 0 e 25, ja que la comecara o quadrado principal
+                    "y": aa,
+                    "color": "#00a8e6",
+                    "w": 30,
+                    "h": 30
+                }
+                console.log(tempEnemy.x);
+                console.log(tempEnemy.y);
+                console.log();
+                context.fillRect(tempEnemy.x, tempEnemy.y, tempEnemy.h, tempEnemy.w);
+                enemies.push(tempEnemy);
+                context.fillText(number, 200, 100);
+            }
+            function enemycanvas(){
+                for(i = 0; i < 5; i++){
+                    context.fillRect(enemies[i].x, enemies[i].y, enemies[i].h, enemies[i].w);
+                }
+            }
+            function changePos(i){
+                min = Math.ceil(0);
+                max = Math.floor(canvas.width - enemies[i].w);
+                a = Math.floor(Math.random() * (max - min + 1)) + min;
+                min = Math.ceil(0);
+                max = Math.floor(canvas.height - enemies[i].h);
+                aa = Math.floor(Math.random() * (max - min + 1)) + min;
+                enemies[i].x = a;
+                console.log(a);
+                a  = Math.floor(Math.random() * canvas.height - enemies[i].h);
+                enemies[i].y = aa;
+                console.log(a);
+            }
+            function collision(){
+                for(i = 0; i < 5; i++){
+                    if(stuff.y < (enemies[i].y + enemies[i].h) && (stuff.y + stuff.h) > enemies[i].y && stuff.x < (enemies[i].x + enemies[i].w) && (stuff.x + stuff.w) > enemies[i].x){
+                        changePos(i);
+                        number += 1;
+                    }
+                }
+            }
+            context.drawImage(stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
+            function animate(){
+                context.clearRect(0,0, canvas.width, canvas.height);
+                context.fillStyle = stuff.color;
+                screen += 1;
+                stuff.x += stuff.speedx;
+                stuff.y += stuff.speedy;
+                 
+                context.drawImage(stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
+                context.fillText(number, 400, 20);
+                enemycanvas();
+                idTeste = requestAnimationFrame(animate); 
+                collision();
+                if(!(0<=stuff.y&&canvas.height>=(stuff.y + stuff.h)&&0<=stuff.x&&canvas.width>=(stuff.x + stuff.w))){  
+                    if(stuff.x < 0){
+                        stuff.x = canvas.width-stuff.w;
+                    }
+                    if((stuff.x + stuff.w) > canvas.width){ 
+                        stuff.x = 0;
+                    }
+                    if(stuff.y < 0){
+                        stuff.y = canvas.height-stuff.h;
+                    }
+                    if((stuff.y  + stuff.h) > canvas.height){ 
+                        stuff.y = 0;
+                    }
+                } 
+                 
+            }
+            function uodateEnemy(i){
+                
+            }
+           var animation = animate();
+            $(document).keydown(function(event){
+                if(event.which == 38){
+                    stuff.update("top");
+                }
+                if(event.which == 40){
+stuff.update("bottom"); 
+                }
+                if(event.which == 37){
+                    stuff.update("left"); 
+                }
+                if(event.which == 39){
+                    stuff.update("right"); 
+                }
+            });
+        });</script>
+	</head>
+	<body>
+        <audio id="au2" loop>
+            <source src="Rick%20Astley%20%20%20Never%20Gonna%20Give%20You%20Up%20(Video).mp3" id="aa" type="audio/mpeg" />
+            <source src="Rick%20Astley%20Never%20Gonna%20Give%20You%20Up%20(Video)%20(online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <canvas height="500" width="600" style="background-image: url(backg.jpg)" id="canvas"></canvas>
+	</body>
+</html>
