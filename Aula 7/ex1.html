@@ -141,7 +141,7 @@
             }
             update: function update(dir){
                     if(dir == "right"){
-                        console.log(stuff.SonicRight);
+                        console.log(stuff.SonicRight[screen%6]);
                         stuff.x += stuff.step;
                         stuff.sonicx = stuff.sonicRight[screen%6].sonicx;
                         stuff.sonicy = stuff.sonicRight[screen%6].sonicy;
@@ -149,6 +149,7 @@
                         stuff.sonicw = stuff.sonicRight[screen %6].sonicw;
                     }
                     else if(dir == "left"){
+                        console.log(stuff.SonicLeft[screen%6]);
                         stuff.x -= stuff.step;
                         stuff.sonicx = stuff.sonicLeft[screen%6].sonicx;
                         stuff.sonicy = stuff.sonicLeft[screen%6].sonicy;
@@ -156,18 +157,20 @@
                         stuff.sonicw = stuff.sonicLeft[screen%6].sonicw;
                     }
                     else if(dir == "bottom"){
+                        console.log(stuff.SonicDowngo[screen%5]);
                         stuff.y += stuff.step;
-                        stuff.sonicx = stuff.sonicDowngo[screen%6].sonicx;
-                        stuff.sonicy = stuff.sonicDowngo[screen%6].sonicy;
-                        stuff.sonich = stuff.sonicDowngo[screen%6].sonich;
-                        stuff.sonicw = stuff.sonicDowngo[screen%6].sonicw;
+                        stuff.sonicx = stuff.sonicDowngo[screen%5].sonicx;
+                        stuff.sonicy = stuff.sonicDowngo[screen%5].sonicy;
+                        stuff.sonich = stuff.sonicDowngo[screen%5].sonich;
+                        stuff.sonicw = stuff.sonicDowngo[screen%5].sonicw;
                     }
                     else if(dir == "top"){
+                        console.log(stuff.SonicUp[screen%8]);
                         stuff.y -= stuff.step;
-                        stuff.sonicx = stuff.sonicUp[screen%6].sonicx;
-                        stuff.sonicy = stuff.sonicUp[screen%6].sonicy;
-                        stuff.sonich = stuff.sonicUp[screen%6].sonich;
-                        stuff.sonicw = stuff.sonicUp[screen%6].sonicw;
+                        stuff.sonicx = stuff.sonicUp[screen%8].sonicx;
+                        stuff.sonicy = stuff.sonicUp[screen%8].sonicy;
+                        stuff.sonich = stuff.sonicUp[screen%8].sonich;
+                        stuff.sonicw = stuff.sonicUp[screen%8].sonicw;
                     }
                     else{
                         stuff.sonicx = stuff.sonicDefault[screen % 6].sonicx;
