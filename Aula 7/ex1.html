@@ -18,9 +18,9 @@
             var stuff = {
                 sonicx: 409,
                 sonicy: 75,
-                sonich: 40,
-                sonicw: 28,
-                step: 1,
+                sonicw: 40,
+                sonich: 28,
+                step: 3,
                 SonicDefault: function(){
                     this.sonicx = 409; 
                     this.sonicy = 75;
@@ -59,54 +59,13 @@
                     sonicw: 19}],
                 x:150,
                 y: 150,
-                update: function(dir){
-                    if(dir == "right"){
-                        this.x += this.step;
-                        this.sonicx = this.sonicRight[screen % 7].sonicx;
-                        this.sonicy = this.sonicRight[screen % 7].sonicy;
-                        this.sonich = this.sonicRight[screen % 7].sonich;
-                        this.sonicw = this.sonicRight[screen % 7].sonicw;
-                    }
-                    else if(dir == "left"){
-                        this.x -= this.step;
-                        this.sonicx = this.sonicLeft[screen % 7].sonicx;
-                        this.sonicy = this.sonicLeft[screen % 7].sonicy;
-                        this.sonich = this.sonicLeft[screen % 7].sonich;
-                        this.sonicw = this.sonicLeft[screen % 7].sonicw;
-                    }
-                    else if(dir == "bottom"){
-                        this.y += this.step;
-                        this.sonicx = this.sonicDowngo[screen % 7].sonicx;
-                        this.sonicy = this.sonicDowngo[screen % 7].sonicy;
-                        this.sonich = this.sonicDowngo[screen % 7].sonich;
-                        this.sonicw = this.sonicDowngo[screen % 7].sonicw;
-                    }
-                    else if(dir == "top"){
-                        this.y -= this.step;
-                        this.sonicx = this.sonicUp[screen % 7].sonicx;
-                        this.sonicy = this.sonicUp[screen % 7].sonicy;
-                        this.sonich = this.sonicUp[screen % 7].sonich;
-                        this.sonicw = this.sonicUp[screen % 7].sonicw;
-                    }
-                    if(dir == "stand"){
-                        this.sonicx = this.sonicDefault[screen % 7].sonicx;
-                        this.sonicy = this.sonicDefault[screen % 7].sonicy;
-                        this.sonich = this.sonicDefault[screen % 7].sonich;
-                        this.sonicw = this.sonicDefault[screen % 7].sonicw;
-                    }
-                    else{
-                        this.sonicx = this.sonicDefault[screen % 7].sonicx;
-                        this.sonicy = this.sonicDefault[screen % 7].sonicy;
-                        this.sonich = this.sonicDefault[screen % 7].sonich;
-                        this.sonicw = this.sonicDefault[screen % 7].sonicw;
-                    }
-                },
-                h: this.sonich,
-                w: this.sonicw
+                h: 40,
+                w: 28
             }
             var i;
             var number = 0;
-            enemies = []
+            enemies = [];
+            context.fillStyle = "#00a8e6"
             for(i = 0; i < 5; i++){
                 min = Math.ceil(0);
                 max = Math.floor(canvas.width - 30);
@@ -154,15 +113,12 @@
                     }
                 }
             }
-            context.drawImage(stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
+            context.drawImage(img, stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
             function animate(){
                 context.clearRect(0,0, canvas.width, canvas.height);
-                context.fillStyle = stuff.color;
                 screen += 1;
-                stuff.x += stuff.speedx;
-                stuff.y += stuff.speedy;
                  
-                context.drawImage(stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
+                context.drawImage(img, stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
                 context.fillText(number, 400, 20);
                 enemycanvas();
                 idTeste = requestAnimationFrame(animate); 
@@ -183,22 +139,55 @@
                 } 
                  
             }
-            function uodateEnemy(i){
-                
-            }
+            update: function update(dir){
+                    if(dir == "right"){
+                        stuff.x += stuff.step;
+                        stuff.sonicx = stuff.sonicRight[screen%7].sonicx;
+                        stuff.sonicy = stuff.sonicRight[screen%7].sonicy;
+                        stuff.sonich = stuff.sonicRight[screen%7].sonich;
+                        stuff.sonicw = stuff.sonicRight[screen %7].sonicw;
+                    }
+                    else if(dir == "left"){
+                        stuff.x -= stuff.step;
+                        stuff.sonicx = stuff.sonicLeft[screen%7].sonicx;
+                        stuff.sonicy = stuff.sonicLeft[screen%7].sonicy;
+                        stuff.sonich = stuff.sonicLeft[screen%7].sonich;
+                        stuff.sonicw = stuff.sonicLeft[screen%7].sonicw;
+                    }
+                    else if(dir == "bottom"){
+                        stuff.y += stuff.step;
+                        stuff.sonicx = stuff.sonicDowngo[screen%7].sonicx;
+                        stuff.sonicy = stuff.sonicDowngo[screen%7].sonicy;
+                        stuff.sonich = stuff.sonicDowngo[screen%7].sonich;
+                        stuff.sonicw = stuff.sonicDowngo[screen%7].sonicw;
+                    }
+                    else if(dir == "top"){
+                        stuff.y -= stuff.step;
+                        stuff.sonicx = stuff.sonicUp[screen%7].sonicx;
+                        stuff.sonicy = stuff.sonicUp[screen%7].sonicy;
+                        stuff.sonich = stuff.sonicUp[screen%7].sonich;
+                        stuff.sonicw = stuff.sonicUp[screen%7].sonicw;
+                    }
+                    else{
+                        stuff.sonicx = stuff.sonicDefault[screen % 7].sonicx;
+                        stuff.sonicy = stuff.sonicDefault[screen % 7].sonicy;
+                        stuff.sonich = stuff.sonicDefault[screen % 7].sonich;
+                        stuff.sonicw = stuff.sonicDefault[screen % 7].sonicw;
+                    }
+                }
            var animation = animate();
             $(document).keydown(function(event){
                 if(event.which == 38){
-                    stuff.update("top");
+                    update("top");
                 }
                 if(event.which == 40){
-stuff.update("bottom"); 
+                    update("bottom"); 
                 }
                 if(event.which == 37){
-                    stuff.update("left"); 
+                    update("left"); 
                 }
                 if(event.which == 39){
-                    stuff.update("right"); 
+                    update("right"); 
                 }
             });
         });</script>
