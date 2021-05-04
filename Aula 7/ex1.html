@@ -24,39 +24,37 @@
                 SonicDefault: function(){
                     this.sonicx = 409; 
                     this.sonicy = 75;
-                    this.sonich = 40;
-                    this.sonicw = 28;
+                    this.sonicw = 40;
+                    this.sonich = 28;
                 },
-                SonicRight:[{sonicx: 36, sonicy: 21, sonich: 40,
-                    sonicw: 28}, {sonicx: 72, sonicy: 21, sonich: 40,
-                    sonicw: 28}, {sonicx: 105, sonicy: 21, sonich: 40,
-                    sonicw: 28}, {sonicx: 135, sonicy: 21, sonich: 40,
-                    sonicw: 28}, {sonicx: 164, sonicy: 21, sonich: 40,
-                    sonicw: 28}, {sonicx: 194, sonicy: 21, sonich: 40,
-                    sonicw: 28}],
-                SonicLeft:[{sonicx: 6, sonicy: 21, sonich: 41,
-                    sonicw: 34}, {sonicx: 386, sonicy: 721, sonich: 41,
-                    sonicw: 34}, {sonicx: 421, sonicy: 721, sonich: 41,
-                    sonicw: 34}, {sonicx: 456, sonicy: 721, sonich: 41,
-                    sonicw: 34}, {sonicx: 491, sonicy: 721, sonich: 41,
-                    sonicw: 34}, {sonicx: 526, sonicy: 721, sonich: 41,
-                    sonicw: 34}],
-                SonicDowngo:[ {sonicx: 784, sonicy: 82, sonich: 36,
-                    sonicw: 20}, {sonicx: 868, sonicy: 82, sonich: 36,
-                    sonicw: 20}, {sonicx: 898, sonicy: 82, sonich: 36,
-                    sonicw: 20}, {sonicx: 952, sonicy: 82, sonich: 36,
-                    sonicw: 20}, {sonicx: 978, sonicy: 82, sonich: 36,
-                    sonicw: 20}],
+                SonicRight:[{sonicx: 36, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 72, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 105, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 135, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 164, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 194, sonicy: 21, sonicw: 40,
+                    sonich: 28}],
+                SonicLeft:[ {sonicx: 386, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 421, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 456, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 491, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 526, sonicy: 721, sonicw: 41,
+                    sonich: 34}],
+                SonicDowngo:[ {sonicx: 784, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 868, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 898, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 952, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 978, sonicy: 82, sonicw: 36,
+                    sonich: 20}],
                 SonicUp:[{
-                    sonicx: 36, sonicy: 610, sonich: 41, sonicw: 19},
-                          {sonicx: 67, sonicy: 610, sonich: 41, sonicw: 19},
-                          {x: 95, y: 610, h: 41 ,
-                    sonicw: 19}, {sonicx: 125, sonicy: 610, sonich: 41,
-                    sonicw: 19}, {sonicx: 154, sonicy: 610, sonich: 41,
-                    sonicw: 19}, {sonicx: 898, sonicy: 610, sonich: 41,
-                    sonicw: 19}, {sonicx: 184, sonicy: 610, sonich: 41,
-                    sonicw: 19}, {sonicx: 214, sonicy: 610, sonich: 41,
-                    sonicw: 19}],
+                    sonicx: 7, sonicy: 610, sonicw: 41, sonich: 19},
+                          {sonicx: 36, sonicy: 610, sonicw: 41, sonich: 19},
+                           {sonicx: 95, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 125, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 154, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 184, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 214, sonicy: 610, sonicw: 41,
+                    sonich: 19}],
                 x:150,
                 y: 150,
                 h: 40,
@@ -141,42 +139,38 @@
             }
             update: function update(dir){
                     if(dir == "right"){
-                        console.log(stuff.SonicRight[screen%6]);
                         stuff.x += stuff.step;
-                        stuff.sonicx = stuff.sonicRight[screen%6].sonicx;
-                        stuff.sonicy = stuff.sonicRight[screen%6].sonicy;
-                        stuff.sonich = stuff.sonicRight[screen%6].sonich;
-                        stuff.sonicw = stuff.sonicRight[screen %6].sonicw;
+                        stuff.sonicx = stuff.SonicRight[screen%6].sonicx;
+                        stuff.sonicy = stuff.SonicRight[screen%6].sonicy;
+                        stuff.sonich = stuff.SonicRight[screen%6].sonich;
+                        stuff.sonicw = stuff.SonicRight[screen %6].sonicw;
                     }
                     else if(dir == "left"){
-                        console.log(stuff.SonicLeft[screen%6]);
                         stuff.x -= stuff.step;
-                        stuff.sonicx = stuff.sonicLeft[screen%6].sonicx;
-                        stuff.sonicy = stuff.sonicLeft[screen%6].sonicy;
-                        stuff.sonich = stuff.sonicLeft[screen%6].sonich;
-                        stuff.sonicw = stuff.sonicLeft[screen%6].sonicw;
+                        stuff.sonicx = stuff.SonicLeft[screen%5].sonicx;
+                        stuff.sonicy = stuff.SonicLeft[screen%5].sonicy;
+                        stuff.sonich = stuff.SonicLeft[screen%5].sonich;
+                        stuff.sonicw = stuff.SonicLeft[screen %5].sonicw;
                     }
                     else if(dir == "bottom"){
-                        console.log(stuff.SonicDowngo[screen%5]);
                         stuff.y += stuff.step;
-                        stuff.sonicx = stuff.sonicDowngo[screen%5].sonicx;
-                        stuff.sonicy = stuff.sonicDowngo[screen%5].sonicy;
-                        stuff.sonich = stuff.sonicDowngo[screen%5].sonich;
-                        stuff.sonicw = stuff.sonicDowngo[screen%5].sonicw;
+                        stuff.sonicx = stuff.SonicDowngo[screen%5].sonicx;
+                        stuff.sonicy = stuff.SonicDowngo[screen%5].sonicy;
+                        stuff.sonich = stuff.SonicDowngo[screen%5].sonich;
+                        stuff.sonicw = stuff.SonicDowngo[screen%5].sonicw;
                     }
                     else if(dir == "top"){
-                        console.log(stuff.SonicUp[screen%8]);
                         stuff.y -= stuff.step;
-                        stuff.sonicx = stuff.sonicUp[screen%8].sonicx;
-                        stuff.sonicy = stuff.sonicUp[screen%8].sonicy;
-                        stuff.sonich = stuff.sonicUp[screen%8].sonich;
-                        stuff.sonicw = stuff.sonicUp[screen%8].sonicw;
+                        stuff.sonicx = stuff.SonicUp[screen%6].sonicx;
+                        stuff.sonicy = stuff.SonicUp[screen%6].sonicy;
+                        stuff.sonich = stuff.SonicUp[screen%6].sonich;
+                        stuff.sonicw = stuff.SonicUp[screen%6].sonicw;
                     }
                     else{
-                        stuff.sonicx = stuff.sonicDefault[screen % 6].sonicx;
-                        stuff.sonicy = stuff.sonicDefault[screen % 6].sonicy;
-                        stuff.sonich = stuff.sonicDefault[screen % 6].sonich;
-                        stuff.sonicw = stuff.sonicDefault[screen % 6].sonicw;
+                        stuff.sonicx = stuff.SonicDefault[screen % 6].sonicx;
+                        stuff.sonicy = stuff.SonicDefault[screen % 6].sonicy;
+                        stuff.sonich = stuff.SonicDefault[screen % 6].sonich;
+                        stuff.sonicw = stuff.SonicDefault[screen % 6].sonicw;
                     }
                 }
            var animation = animate();
@@ -193,6 +187,9 @@
                 if(event.which == 39){
                     update("right"); 
                 }
+            });
+            $(document).keyup(function(event){
+                stuff.SonicDefault();
             });
         });</script>
 	</head>
