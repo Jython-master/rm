@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>ex1</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $().ready(function(){
+            var flag = true;
+            var canvas = document.getElementById("canvas");
+            var audio = document.getElementById("au1");
+            var audioo = document.getElementById("au2");
+            var context = canvas.getContext("2d");
+            var context = canvas.getContext("2d");
+            var idTeste;
+            var music = document.getElementById("mus");
+            var musiic = document.getElementById("musiic");
+            var musi = document.getElementById("musi");
+            var screen = 0;
+            var animation;
+            var start = new Image();
+            start.src = "./hqdefault.jpg";
+            context.drawImage(start, 0, 0);
+            var img = new Image();
+            img.src = "./sonic.png";
+            var stuff = {
+                sonicx: 409,
+                sonicy: 75,
+                sonicw: 40,
+                sonich: 28,
+                step: 5,
+                SonicDefault: function(){
+                    this.sonicx = 409; 
+                    this.sonicy = 75;
+                    this.sonicw = 40;
+                    this.sonich = 28;
+                },
+                SonicRight:[{sonicx: 36, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 72, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 105, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 135, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 164, sonicy: 21, sonicw: 40,
+                    sonich: 28}, {sonicx: 194, sonicy: 21, sonicw: 40,
+                    sonich: 28}],
+                SonicLeft:[ {sonicx: 386, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 421, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 456, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 491, sonicy: 721, sonicw: 41,
+                    sonich: 34}, {sonicx: 526, sonicy: 721, sonicw: 41,
+                    sonich: 34}],
+                SonicDowngo:[ {sonicx: 784, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 868, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 898, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 952, sonicy: 82, sonicw: 36,
+                    sonich: 20}, {sonicx: 978, sonicy: 82, sonicw: 36,
+                    sonich: 20}],
+                SonicUp:[{
+                    sonicx: 7, sonicy: 610, sonicw: 41, sonich: 19},
+                          {sonicx: 36, sonicy: 610, sonicw: 41, sonich: 19},
+                           {sonicx: 95, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 125, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 154, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 184, sonicy: 610, sonicw: 41,
+                    sonich: 19}, {sonicx: 214, sonicy: 610, sonicw: 41,
+                    sonich: 19}],
+                x:150,
+                y: 150,
+                h: 40,
+                w: 28
+            }
+            var i;
+            var number = 0;
+            enemiesUp = [];
+            enemiesDown = [];
+            context.fillStyle = "#00a8e6";
+            function addEnemiesUp(){
+                
+                    min = Math.ceil(0);
+                    max = Math.floor(canvas.width - 30);
+                    a = Math.floor(Math.random() * (max - min + 1)) + min;
+                    enemiesUp.push({
+                        "x": a,
+                        "y": canvas.height + 50,
+                        "color": "#00a8e6",
+                        "w": 30,
+                        "h": 30,
+                        update:function(){
+                            this.y -= 3;
+                            if(this.y + this.h < 0){
+                                enemiesUp.splice(this, 1);
+                            }
+
+                        },
+                        draw:function(){
+                            context.fillStyle = this.color;
+                            context.fillRect(this.x,this.y,this.w,this.h);
+                        }
+                    });
+                
+            }
+            function addEnemiesDown(){
+                
+                    min = Math.ceil(0);
+                    max = Math.floor(canvas.height - 30);
+                    aa = Math.floor(Math.random() * (max - min + 1)) + min;
+                    enemiesDown.push({
+                        "x": canvas.width + 50,
+                        "y": aa,
+                        "color": "#00a8e6",
+                        "w": 30,
+                        "h": 30,
+                        update:function(){
+                            this.x -= 3;
+                            if(this.x + this.w < 0){
+                                enemiesDown.splice(this, 1);
+                            }
+                        },
+                        draw:function(){
+                            context.fillStyle = this.color;
+                            context.fillRect(this.x,this.y,this.w,this.h);
+                        }
+                    });                    
+                
+            }
+            function collisionUp(){
+                for(i = 0; i < enemiesUp.length; i++){
+                    if(stuff.y < (enemiesUp[i].y + enemiesUp[i].h) && (stuff.y + stuff.h) > enemiesUp[i].y && stuff.x < (enemiesUp[i].x + enemiesUp[i].w) && (stuff.x + stuff.w) > enemiesUp[i].x){
+                        number += 1;
+                        musiic.pause();
+                        //music.play();
+                        cancelAnimationFrame(idTeste);
+                    }
+                }
+            }
+            function collisionDown(){
+                for(i = 0; i < enemiesDown.length; i++){
+                    if(stuff.y < (enemiesDown[i].y + enemiesDown[i].h) && (stuff.y + stuff.h) > enemiesDown[i].y && stuff.x < (enemiesDown[i].x + enemiesDown[i].w) && (stuff.x + stuff.w) > enemiesDown[i].x){
+                        number += 1;
+                        musiic.pause();
+                        //music.play();
+                        cancelAnimationFrame(idTeste);
+                    }
+                }
+            }   
+            context.font = "30px"
+            context.drawImage(img, stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
+            function animate(){
+                
+                context.clearRect(0,0, canvas.width, canvas.height);
+                screen += 1;               
+                context.drawImage(img, stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
+                context.fillStyle = "white";
+                context.fillText(screen, 400, 50);
+                for(i = 0; i < enemiesUp.length; i++){
+                    enemiesUp[i].update();
+                    enemiesUp[i].draw();
+                }
+                for(i = 0; i < enemiesDown.length; i++){
+                    enemiesDown[i].update();
+                    enemiesDown[i].draw();
+                }
+                idTeste = requestAnimationFrame(animate); 
+                collisionUp();
+                collisionDown();
+                if(!(0<=stuff.y&&canvas.height>=(stuff.y + stuff.h)&&0<=stuff.x&&canvas.width>=(stuff.x + stuff.w))){  
+                    if(stuff.x < 0){
+                        stuff.x = canvas.width-stuff.w;
+                    }
+                    if((stuff.x + stuff.w) > canvas.width){ 
+                        stuff.x = 0;
+                    }
+                    if(stuff.y < 0){
+                        stuff.y = canvas.height-stuff.h;
+                    }
+                    if((stuff.y  + stuff.h) > canvas.height){ 
+                        stuff.y = 0;
+                    }
+                } 
+                 
+            }
+            update: function update(dir){
+                    if(dir == "right"){
+                        stuff.x += stuff.step;
+                        stuff.sonicx = stuff.SonicRight[screen%6].sonicx;
+                        stuff.sonicy = stuff.SonicRight[screen%6].sonicy;
+                        stuff.sonich = stuff.SonicRight[screen%6].sonich;
+                        stuff.sonicw = stuff.SonicRight[screen %6].sonicw;
+                    }
+                    else if(dir == "left"){
+                        stuff.x -= stuff.step;
+                        stuff.sonicx = stuff.SonicLeft[screen%5].sonicx;
+                        stuff.sonicy = stuff.SonicLeft[screen%5].sonicy;
+                        stuff.sonich = stuff.SonicLeft[screen%5].sonich;
+                        stuff.sonicw = stuff.SonicLeft[screen %5].sonicw;
+                    }
+                    else if(dir == "bottom"){
+                        stuff.y += stuff.step;
+                        stuff.sonicx = stuff.SonicDowngo[screen%5].sonicx;
+                        stuff.sonicy = stuff.SonicDowngo[screen%5].sonicy;
+                        stuff.sonich = stuff.SonicDowngo[screen%5].sonich;
+                        stuff.sonicw = stuff.SonicDowngo[screen%5].sonicw;
+                    }
+                    else if(dir == "top"){
+                        stuff.y -= stuff.step;
+                        stuff.sonicx = stuff.SonicUp[screen%6].sonicx;
+                        stuff.sonicy = stuff.SonicUp[screen%6].sonicy;
+                        stuff.sonich = stuff.SonicUp[screen%6].sonich;
+                        stuff.sonicw = stuff.SonicUp[screen%6].sonicw;
+                    }
+                    else{
+                        stuff.sonicx = stuff.SonicDefault[screen % 6].sonicx;
+                        stuff.sonicy = stuff.SonicDefault[screen % 6].sonicy;
+                        stuff.sonich = stuff.SonicDefault[screen % 6].sonich;
+                        stuff.sonicw = stuff.SonicDefault[screen % 6].sonicw;
+                    }
+                }
+                $(document).keydown(function(event){
+                if(event.which == 32 && flag){
+                    flag = false;
+
+                    setInterval(addEnemiesUp,1000);
+            setInterval(addEnemiesDown,1000);
+           animation = animate();
+           musi.pause();
+           musiic.play();
+                }
+            });
+            $(document).keydown(function(event){
+                if(event.which == 38){
+                    update("top");
+                }
+                if(event.which == 40){
+                    update("bottom"); 
+                }
+                if(event.which == 37){
+                    update("left"); 
+                }
+                if(event.which == 39){
+                    update("right"); 
+                }
+            });
+            $(document).keyup(function(event){
+                stuff.SonicDefault();
+            });
+        });</script>
+	</head>
+	<body>
+        <audio id="mus" loop>
+            <source src="Rick%20Astley%20%20%20Never%20Gonna%20Give%20You%20Up%20(Video).mp3" type="audio/mpeg" />
+            <source src="Rick%20Astley%20Never%20Gonna%20Give%20You%20Up%20(Video)%20(online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <audio id="musiic" loop>
+            <source src="Untitled Project (online-audio-converter.com).mp3" type="audio/mpeg" />
+            <source src="Untitled Project (online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <audio id="musi" autoplay>
+            <source src="Aula 1_Frankie.mp3" type="audio/mpeg" />
+            <source src="Untitled Project (online-audio-converter.com).ogg" type="audio/ogg" />
+        </audio>
+        <canvas height="500" width="600" style="background-image: url(backg.jpg)" id="canvas"></canvas>
+	</body>
+</html>
