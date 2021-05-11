@@ -9,7 +9,7 @@
             var cancelaTelaInicial; //criei
             var cancelaTela;
             var gameOver = new Image();
-            gameOver = "./go.jpg";
+            gameOver.src = "./go.jpg"; //tinha faltado o src
             var flag = true;
             var canvas = document.getElementById("canvas");
             var audio = document.getElementById("au1");
@@ -32,6 +32,8 @@
             cancelaTelaInicial = requestAnimationFrame(teste);//criei
             function teste2(){//criei
                 context.drawImage(gameOver, 0, 0, canvas.width, canvas.height);//criei
+                context.font = "40px arial";
+                context.fillText("Score "+screen, 200, 350);
                 cancelaTela = requestAnimationFrame(teste2);//criei
             }//criei
             var img = new Image();
@@ -140,9 +142,10 @@
                     if(stuff.y < (enemiesUp[i].y + enemiesUp[i].h) && (stuff.y + stuff.h) > enemiesUp[i].y && stuff.x < (enemiesUp[i].x + enemiesUp[i].w) && (stuff.x + stuff.w) > enemiesUp[i].x){
                         number += 1;
                         musiic.pause();
-                        //music.play();
+                        music.play();
                         cancelAnimationFrame(idTeste);
                         context.clearRect(0,0, canvas.width, canvas.height);
+    
                         cancelaTela = requestAnimationFrame(teste2);//criei
                     }
                 }
@@ -152,7 +155,7 @@
                     if(stuff.y < (enemiesDown[i].y + enemiesDown[i].h) && (stuff.y + stuff.h) > enemiesDown[i].y && stuff.x < (enemiesDown[i].x + enemiesDown[i].w) && (stuff.x + stuff.w) > enemiesDown[i].x){
                         number += 1;
                         musiic.pause();
-                        //music.play();
+                        music.play();
                         cancelAnimationFrame(idTeste);
                         context.clearRect(0,0, canvas.width, canvas.height);
                         cancelaTela = requestAnimationFrame(teste2);//criei
@@ -177,6 +180,7 @@
                     enemiesDown[i].update();
                     enemiesDown[i].draw();
                 }
+                
                 idTeste = requestAnimationFrame(animate); 
                 collisionUp();
                 collisionDown();
@@ -238,7 +242,8 @@
                     flag = false;
                     setInterval(addEnemiesUp,1000);
                     setInterval(addEnemiesDown,1000);
-                    animation = animate();
+                    //animation = animate();
+                    idTeste = requestAnimationFrame(animate); //adicionei
                     musi.pause();
                     musiic.play();
                     cancelAnimationFrame(cancelaTelaInicial);//criei
