@@ -6,12 +6,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
         $().ready(function(){
+            var cancelaTelaInicial; //criei
+            var cancelaTela;
+            var gameOver = new Image();
+            gameOver = "./go.jpg";
             var flag = true;
             var canvas = document.getElementById("canvas");
             var audio = document.getElementById("au1");
             var audioo = document.getElementById("au2");
             var context = canvas.getContext("2d");
-            var context = canvas.getContext("2d");
+            //var context = canvas.getContext("2d");
             var idTeste;
             var music = document.getElementById("mus");
             var musiic = document.getElementById("musiic");
@@ -21,6 +25,15 @@
             var start = new Image();
             start.src = "./hqdefault.jpg";
             context.drawImage(start, 0, 0);
+            function teste(){//criei
+                context.drawImage(start, 0, 0, canvas.width, canvas.height);//criei
+                cancelaTelaInicial = requestAnimationFrame(teste);//criei
+            }//criei
+            cancelaTelaInicial = requestAnimationFrame(teste);//criei
+            function teste2(){//criei
+                context.drawImage(gameOver, 0, 0, canvas.width, canvas.height);//criei
+                cancelaTela = requestAnimationFrame(teste2);//criei
+            }//criei
             var img = new Image();
             img.src = "./sonic.png";
             var stuff = {
@@ -129,6 +142,8 @@
                         musiic.pause();
                         //music.play();
                         cancelAnimationFrame(idTeste);
+                        context.clearRect(0,0, canvas.width, canvas.height);
+                        cancelaTela = requestAnimationFrame(teste2);//criei
                     }
                 }
             }
@@ -139,10 +154,13 @@
                         musiic.pause();
                         //music.play();
                         cancelAnimationFrame(idTeste);
+                        context.clearRect(0,0, canvas.width, canvas.height);
+                        cancelaTela = requestAnimationFrame(teste2);//criei
+
                     }
                 }
             }   
-            context.font = "30px"
+            context.font = "30px arial"
             context.drawImage(img, stuff.sonicx, stuff.sonicy, stuff.sonich, stuff.sonicw, stuff.x, stuff.y, stuff.w, stuff.h);
             function animate(){
                 
@@ -214,15 +232,16 @@
                         stuff.sonicw = stuff.SonicDefault[screen % 6].sonicw;
                     }
                 }
+                context.drawImage(start, 0, 0);
                 $(document).keydown(function(event){
                 if(event.which == 32 && flag){
                     flag = false;
-
                     setInterval(addEnemiesUp,1000);
-            setInterval(addEnemiesDown,1000);
-           animation = animate();
-           musi.pause();
-           musiic.play();
+                    setInterval(addEnemiesDown,1000);
+                    animation = animate();
+                    musi.pause();
+                    musiic.play();
+                    cancelAnimationFrame(cancelaTelaInicial);//criei
                 }
             });
             $(document).keydown(function(event){
@@ -241,7 +260,9 @@
             });
             $(document).keyup(function(event){
                 stuff.SonicDefault();
-            });
+            }); 
+
+
         });</script>
 	</head>
 	<body>
